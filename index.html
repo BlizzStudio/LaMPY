@@ -56,11 +56,19 @@
 <footer class="p-4 bg-white fixed bottom-0 left-0 w-full">
     <div class="bg-purple-300 p-2 rounded-lg flex items-center max-w-md mx-auto">
         <div class="relative w-full flex items-center bg-white rounded-full">
+            <!-- Emoji Button -->
+            <button 
+                class="absolute left-2 bg-purple-100 p-2 rounded-full cursor-pointer" 
+                onclick="toggleEmojiPicker()">
+                <i class="far fa-smile text-black text-xl"></i>
+            </button>
+            <!-- Input Field -->
             <input 
-                class="flex-1 bg-transparent text-gray-500 p-2 pl-4 rounded-full focus:outline-none" 
+                class="flex-1 bg-transparent text-gray-500 p-2 pl-12 pr-12 rounded-full focus:outline-none" 
                 id="user-input" 
                 placeholder="Type your message here" 
                 type="text">
+            <!-- Send Button -->
             <button 
                 class="absolute right-2 bg-purple-100 p-2 rounded-full cursor-pointer" 
                 onclick="sendMessage()">
@@ -71,6 +79,7 @@
         </div>
     </div>
 </footer>
+
 
 
 </body>
