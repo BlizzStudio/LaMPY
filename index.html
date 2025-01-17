@@ -15,26 +15,65 @@
   
 </head>
 <body class="bg-white h-screen flex flex-col justify-between">
-<header class="flex items-center justify-between p-4 bg-white text-black sticky top-0 left-0 z-50">
-    <!-- Menu Icon -->
-    <span class="text-2xl cursor-pointer md:text-3xl">&#9776;</span>
+ <style>
+        /* Custom Styles for dark mode */
+        .dark {
+            background-color: #1a202c; /* Dark background */
+            color: white; /* Light text */
+        }
+    </style>
+</head>
+<body class="h-full bg-white text-black transition-colors duration-300">
 
-    <!-- Title -->
-    <h1 class="text-lg md:text-2xl font-semibold text-center flex-1">LampyAI</h1>
+    <header class="flex items-center justify-between p-4 bg-white text-black sticky top-0 left-0 z-50">
+        <!-- Menu Icon -->
+        <span class="text-2xl cursor-pointer md:text-3xl" onclick="openNav()">&#9776;</span>
 
-    <!-- Dark Mode Toggle -->
-    <div class="flex items-center">
-        <!-- Hidden Checkbox -->
-        <input type="checkbox" id="dark-mode-toggle" class="hidden peer">
-        
-        <!-- Toggle Slider -->
-        <label for="dark-mode-toggle" 
-               class="w-12 h-6 bg-gray-300 rounded-full relative cursor-pointer flex items-center">
-            <!-- Slider Circle -->
-            <span class="w-5 h-5 bg-white rounded-full shadow absolute left-0 top-0.5 transition-all duration-300 peer-checked:translate-x-6"></span>
-        </label>
+        <!-- Title -->
+        <h1 class="text-lg md:text-2xl font-semibold text-center flex-1">LampyAI</h1>
+
+        <!-- Dark Mode Toggle -->
+        <div class="flex items-center">
+            <!-- Hidden Checkbox -->
+            <input type="checkbox" id="dark-mode-toggle" class="hidden peer" onchange="toggleDarkMode()">
+
+            <!-- Toggle Slider -->
+            <label for="dark-mode-toggle" 
+                   class="w-12 h-6 bg-gray-300 rounded-full relative cursor-pointer flex items-center">
+                <!-- Slider Circle -->
+                <span class="w-5 h-5 bg-white rounded-full shadow absolute left-0 top-0.5 transition-all duration-300 peer-checked:translate-x-6"></span>
+            </label>
+        </div>
+    </header>
+
+    <!-- Sidebar -->
+    <div id="mySidenav" class="sidenav fixed top-0 left-0 w-0 h-full bg-gray-800 text-white overflow-x-hidden transition-width duration-300">
+        <a href="javascript:void(0)" class="closebtn text-2xl absolute top-4 right-4" onclick="closeNav()">&times;</a>
+        <div class="mt-16 space-y-4 pl-6">
+            <a href="#" class="block text-lg hover:underline">About</a>
+            <a href="#" class="block text-lg hover:underline">v2 Coming Soon</a>
+            <a href="#" class="block text-lg hover:underline">Terms of Service</a>
+            <a href="#" class="block text-lg hover:underline">Privacy</a>
+        </div>
     </div>
-</header>
+
+    <script>
+        // Open sidebar
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+        }
+
+        // Close sidebar
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+        }
+
+        // Toggle dark mode by adding/removing the 'dark' class on body
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark');
+        }
+    </script>
+
 
 
 
