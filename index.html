@@ -90,7 +90,22 @@
         </div>
     </footer>
 
+ <script>
+        // Open sidebar
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+        }
 
+        // Close sidebar
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+        }
+
+        // Toggle dark mode by adding/removing the 'dark' class on body
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark');
+        }
+    </script>
     <!-- Emoji Picker -->
     <div class="emoji-picker" id="emoji-picker">
         <span onclick="addEmoji('😊')">😊</span>
