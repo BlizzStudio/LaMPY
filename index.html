@@ -23,19 +23,15 @@
     <h1 class="text-lg md:text-2xl font-semibold text-center flex-1">LampyAI</h1>
     
     <!-- Dark Mode Toggle -->
-    <div class="flex items-center space-x-2">
-        <!-- Hidden Checkbox for Toggling -->
+    <div class="flex items-center">
+        <!-- Hidden Checkbox -->
         <input type="checkbox" id="dark-mode-toggle" class="hidden peer">
         
-        <!-- Toggle Button -->
+        <!-- Toggle Slider -->
         <label for="dark-mode-toggle" 
-               class="w-10 h-5 bg-gray-300 rounded-full relative flex items-center cursor-pointer">
-            <span class="absolute w-4 h-4 bg-white rounded-full shadow transform transition-transform duration-200 peer-checked:translate-x-5"></span>
+               class="w-10 h-5 bg-gray-300 rounded-full relative cursor-pointer">
+            <span class="absolute w-4 h-4 bg-white rounded-full shadow transition-transform duration-200 transform peer-checked:translate-x-5"></span>
         </label>
-        
-        <!-- Icons for Light and Dark Mode -->
-        <i class="fas fa-sun text-xl text-yellow-400 peer-checked:hidden"></i>
-        <i class="fas fa-moon text-xl text-gray-600 hidden peer-checked:inline"></i>
     </div>
 </header>
 
