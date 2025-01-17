@@ -15,22 +15,38 @@
   
 </head>
 <body class="bg-white h-screen flex flex-col justify-between">
- <style>
+
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LampyAI</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
         /* Custom Styles for dark mode */
         .dark {
             background-color: #1a202c; /* Dark background */
             color: white; /* Light text */
         }
+        .dark .header, .dark .footer, .dark .sidenav {
+            background-color: #2d3748; /* Dark background for header, footer, and sidebar */
+        }
+        .dark .sidenav a {
+            color: white; /* White text for sidebar links */
+        }
     </style>
 </head>
 <body class="h-full bg-white text-black transition-colors duration-300">
 
-    <header class="flex items-center justify-between p-4 bg-white text-black sticky top-0 left-0 z-50">
+    <!-- Header -->
+    <header class="flex items-center justify-between p-4 bg-white text-black sticky top-0 left-0 z-50 header">
         <!-- Menu Icon -->
         <span class="text-2xl cursor-pointer md:text-3xl" onclick="openNav()">&#9776;</span>
 
         <!-- Title -->
-        <h1 class="text-lg md:text-2xl font-semibold text-center flex-1">LampyAI</h1>
+        <h1 class="text-lg md:text-2xl font-semibold text-center flex-1 LampyAI">LampyAI</h1>
 
         <!-- Dark Mode Toggle -->
         <div class="flex items-center">
@@ -47,8 +63,8 @@
     </header>
 
     <!-- Sidebar -->
-    <div id="mySidenav" class="sidenav fixed top-0 left-0 w-0 h-full bg-gray-800 text-white overflow-x-hidden transition-width duration-300">
-        <a href="javascript:void(0)" class="closebtn text-2xl absolute top-4 right-4" onclick="closeNav()">&times;</a>
+    <div id="mySidenav" class="sidenav fixed top-0 left-0 w-0 h-full bg-gray-800 text-white overflow-x-hidden transition-all duration-300">
+        <a href="javascript:void(0)" class="closebtn text-2xl absolute top-4 right-4 cursor-pointer" onclick="closeNav()">&times;</a>
         <div class="mt-16 space-y-4 pl-6">
             <a href="#" class="block text-lg hover:underline">About</a>
             <a href="#" class="block text-lg hover:underline">v2 Coming Soon</a>
@@ -56,6 +72,21 @@
             <a href="#" class="block text-lg hover:underline">Privacy</a>
         </div>
     </div>
+
+    <!-- Footer -->
+    <footer class="p-4 bg-white text-black footer">
+        <div class="bg-purple-300 p-2 rounded-lg flex items-center space-x-2 max-w-md mx-auto">
+            <div class="bg-purple-100 p-2 rounded-full cursor-pointer">
+                <i class="far fa-smile text-black text-xl"></i> <!-- Outlined Smiley Face Icon -->
+            </div>
+            <input class="flex-1 bg-white text-gray-500 rounded-full p-2" id="user-input" placeholder="Type your message here" type="text">
+            <div class="bg-purple-100 p-2 rounded-full cursor-pointer">
+                <svg class="w-6 h-6 text-black" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4.20889 10.7327C3.9232 11.0326 3.93475 11.5074 4.23467 11.7931C4.5346 12.0788 5.00933 12.0672 5.29502 11.7673L11.2495 5.516V20.25C11.2495 20.6642 11.5853 21 11.9995 21C12.4137 21 12.7495 20.6642 12.7495 20.25V5.51565L18.7043 11.7673C18.99 12.0672 19.4648 12.0788 19.7647 11.7931C20.0646 11.5074 20.0762 11.0326 19.7905 10.7327L12.7238 3.31379C12.5627 3.14474 12.3573 3.04477 12.1438 3.01386C12.0971 3.00477 12.0489 3 11.9995 3C11.9498 3 11.9012 3.00483 11.8543 3.01406C11.6412 3.04518 11.4363 3.14509 11.2756 3.31379L4.20889 10.7327Z"></path>
+                </svg>
+            </div>
+        </div>
+    </footer>
 
     <script>
         // Open sidebar
@@ -73,6 +104,9 @@
             document.body.classList.toggle('dark');
         }
     </script>
+
+</body>
+</html>
 
 
 
