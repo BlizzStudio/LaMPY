@@ -15,20 +15,23 @@
   
 </head>
 <body class="bg-white h-screen flex flex-col justify-between">
-    <header class="flex items-center justify-between p-4">
-        <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
-        <div id="mySidenav" class="sidenav">
-            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-            <a href="#">About</a>
-            <a href="#">v2 Coming Soon</a>
-            <a href="#">Terms of service</a>
-            <a href="#">Privacy</a>
-          </div>
-        <h1 class="text-xl text-black">LampyAI</h1>
-        <div class="flex items-start space-x-2">
-            </div>
-        
-    </header>
+<header class="flex items-center justify-between p-4 bg-white sticky top-0 left-0 z-50 shadow-md">
+    <span class="text-2xl cursor-pointer md:text-3xl" onclick="openNav()">&#9776;</span>
+    <div id="mySidenav" class="sidenav fixed top-0 left-0 h-full bg-gray-800 text-white w-0 overflow-x-hidden transition-width duration-300">
+        <a href="javascript:void(0)" class="closebtn text-2xl absolute top-4 right-4" onclick="closeNav()">&times;</a>
+        <div class="mt-16 space-y-4 pl-6">
+            <a href="#" class="block text-lg hover:underline">About</a>
+            <a href="#" class="block text-lg hover:underline">v2 Coming Soon</a>
+            <a href="#" class="block text-lg hover:underline">Terms of Service</a>
+            <a href="#" class="block text-lg hover:underline">Privacy</a>
+        </div>
+    </div>
+    <h1 class="text-lg md:text-2xl text-black font-semibold">LampyAI</h1>
+    <div class="hidden sm:flex items-center space-x-4">
+        <!-- Add additional elements here -->
+    </div>
+</header>
+
     <main class="flex-1 p-4 overflow-auto" id="chat-container">
         <div class="text-center text-gray-500 mb-4">Today</div>
         <div class="flex items-start space-x-2">
