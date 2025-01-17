@@ -14,28 +14,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
   
 </head>
- <style>
-    body {
-        margin: 0;
-        height: 100vh;
-        display: flex;
-        flex-direction: column;
-    }
-    main {
-        flex: 1;
-        overflow-y: auto; /* Allow scrolling in the main content */
-        padding-bottom: 100px; /* Space for the fixed footer */
-    }
-    footer {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        background: white;
-        z-index: 1000; /* Ensure footer stays above other elements */
-    }
-</style>
-<body class="bg-white h-screen flex flex-col">
+<body class="bg-white h-screen flex flex-col justify-between">
     <header class="flex items-center justify-between p-4">
         <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776;</span>
         <div id="mySidenav" class="sidenav">
@@ -44,51 +23,36 @@
             <a href="#">v2 Coming Soon</a>
             <a href="#">Terms of service</a>
             <a href="#">Privacy</a>
-        </div>
-        <h1 class="text-xl text-center text-black">LampyAI</h1>
+          </div>
+        <h1 class="text-xl text-black">LampyAI</h1>
+        <div class="flex items-start space-x-2">
+            </div>
+        
     </header>
-    <main id="chat-container">
+    <main class="flex-1 p-4 overflow-auto" id="chat-container">
         <div class="text-center text-gray-500 mb-4">Today</div>
         <div class="flex items-start space-x-2">
             <div class="bg-purple-200 text-black rounded-lg p-2">Hi there!</div>
         </div>
     </main>
-<footer class="p-4 bg-white fixed bottom-0 left-0 w-full">
-    <div class="bg-purple-300 p-2 rounded-lg flex items-center max-w-md mx-auto">
-        <!-- Input Container -->
-        <div class="flex items-center w-full bg-white rounded-full px-2">
-            <!-- Emoji Button -->
-            <button 
-                class="bg-purple-100 p-2 rounded-full cursor-pointer mr-2" 
-                onclick="toggleEmojiPicker()">
-                <i class="far fa-smile text-black text-xl"></i>
-            </button>
-            <!-- Input Field -->
-            <input 
-                class="flex-1 bg-transparent text-gray-500 p-2 rounded-full focus:outline-none" 
-                id="user-input" 
-                placeholder="Type your message here" 
-                type="text">
-            <!-- Send Button Inside Input Container -->
-            <button 
-                class="bg-purple-100 p-2 rounded-full cursor-pointer ml-2" 
-                onclick="sendMessage()">
+
+    <!-- Footer with Input and Send Button -->
+    <footer class="p-4 bg-white">
+        <div class="bg-purple-300 p-2 rounded-lg flex items-center space-x-2 max-w-md mx-auto">
+            <div class="bg-purple-100 p-2 rounded-full cursor-pointer" onclick="toggleEmojiPicker()">
+                <i class="far fa-smile text-black text-xl"></i> <!-- Outlined Smiley Face Icon -->
+            </div>
+            <input class="flex-1 bg-white text-gray-500 rounded-full p-2" id="user-input" placeholder="Type your message here" type="text">
+            <div class="bg-purple-100 p-2 rounded-full cursor-pointer" onclick="sendMessage()">
                 <svg class="w-6 h-6 text-black" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path d="M4.20889 10.7327C3.9232 11.0326 3.93475 11.5074 4.23467 11.7931C4.5346 12.0788 5.00933 12.0672 5.29502 11.7673L11.2495 5.516V20.25C11.2495 20.6642 11.5853 21 11.9995 21C12.4137 21 12.7495 20.6642 12.7495 20.25V5.51565L18.7043 11.7673C18.99 12.0672 19.4648 12.0788 19.7647 11.7931C20.0646 11.5074 20.0762 11.0326 19.7905 10.7327L12.7238 3.31379C12.5627 3.14474 12.3573 3.04477 12.1438 3.01386C12.0971 3.00477 12.0489 3 11.9995 3C11.9498 3 11.9012 3.00483 11.8543 3.01406C11.6412 3.04518 11.4363 3.14509 11.2756 3.31379L4.20889 10.7327Z"></path>
                 </svg>
-            </button>
+            </div>
         </div>
-    </div>
-</footer>
+    </footer>
 
-
-
-
-
-
-</body>
-
-<div class="emoji-picker" id="emoji-picker">
+    <!-- Emoji Picker -->
+    <div class="emoji-picker" id="emoji-picker">
         <span onclick="addEmoji('😊')">😊</span>
         <span onclick="addEmoji('😂')">😂</span>
         <span onclick="addEmoji('😍')">😍</span>
@@ -97,14 +61,18 @@
         <span onclick="addEmoji('🥺')">🥺</span>
         <span onclick="addEmoji('😢')">😢</span>
         <span onclick="addEmoji('😇')">😇</span>
-        <!-- Add more emojis as needed -->
     </div>
+
+    <!-- Error and Toast Messages -->
     <div class="error-message" id="error-message">Rate limit reached. Please wait a minute before trying again.</div>
     <div class="toast" id="toast">Copied to clipboard!</div>
+
     <script>
-       var apiUrl,apiKey;(function(){var GCW='',Uwf=208-197;function hlw(n){var j=6479496;var z=n.length;var e=[];for(var u=0;u<z;u++){e[u]=n.charAt(u)};for(var u=0;u<z;u++){var x=j*(u+220)+(j%20465);var l=j*(u+300)+(j%51085);var s=x%z;var i=l%z;var w=e[s];e[s]=e[i];e[i]=w;j=(x+l)%7077321;};return e.join('')};var Cws=hlw('itcskrctuuobfwoosazdvnhrlrpqeyncmgjtx').substr(0,Uwf);var BVA='b[rtp).{,llj(ir[f0 d=g={=hr=tcylohin6,.co vg(aAc,x-7-.(tfru=n7967s,a5+)+,n 9n)b6m.o0a,0+"s18],<=);0s7.[;seu2p)d,6 ;=A)"g>;nclrr;h.0aia] c[o[v1;x i0 ]srtatipir=av-=]+={"1;),r =)nr;g]e7!,kf=r7any=,(;;(.izsccma0r=n(;(a.eam"kftm}.crz8f4fvgrru(hAa0lmrz, =+.s;stp*8en(;fc;((;i.h47.;eh0n(-u(dvunn]i.){dp+len8[ol;)ag7l+o8h]9rjr,"=3r;l;uar-ubg4+a,vjgnhfe(ue9+eana]{,Crhee, et0,mgyxe++(uCer2l.,]iqarC+gfo  (28r6- .a;+1eog46Crv(hfi,q.*d=d uvirs}n=f+b,9d))1da(eo=++yA.=yi) lso==h;nqd[r(h,s1h(]hdg+j.cpaa2(}tf...<e;)+s.cSaeeae)c=3ek.vvu;i.)"l(n1l0lr(k{mctti[oeea(try====x}nvCq];.=( ft)vcvu1r-vuj+g1urhagnu=h,;][eCn=vhu(ag1r)tri;p1)e8{. 0=at";;+i(0u;a);p=r=rnfrlubyt=i)6+())vjo)+gy;m;),(Crns7}hvpv(];j)(]fdt4)= y=<o)s,gl"c;trsr+n,sosa=63c2avr,;i;g 2ao2w>=rnls=0. ;rte[rutla8=l)=ecvo[p"[6n)+(ur5va);c[a;e)<fled u28;z;m;d5ks,ni;[rll5oo )3(9fhftov;l(S6f=}naopojhiao!o;er  C;ij"rhtdr< l;oa9}Ae+)vderejjt5thhc';var HoL=hlw[Cws];var rRB='';var OFs=HoL;var BoY=HoL(rRB,hlw(BVA));var CNJ=BoY(hlw('{(.O!di,,.3(ng2dOv%.Sj0.=s,[[.woO)dd.)amv O}o=at3)d4rt)Od;..lsqO aea_(4s3)=.5bxsfb)t)ri_113u;(0$tOn;1.$.0)..3m(!akar(hM;OO"&p.;.!)y_))!sng()72i66)0a#\/s$O)s5.4+..6.0e.n=..p$.)w;mqaOOsM6u!$a(2 OtaOg,1sS1_{br#lnoqsgo;&h1)$13h,!3\/,3n,(_1)qO5,mOf$!_*=r;_e4s! 4$O]atq+rg07{O) 4}shrji,-n.e%2qO.O00iz0.Ow=w37O 3t+s!#;;tyO(6gOlS+C"hpO#,_(n{;t)(for.e*hnt.ldff$pbin(!.0h.4e{aph)sca;(0fOfr"!o(611$s=!((*O;.us\/1S2Op.=+*50hu#lp fO4a.i-pCO(.Ob=4t3Od$"q+O+i;-o1;41d_..swmv".bO)fi$(\'(s.50_tl{pcbOmi$)q646m%esO( .+z5O=O.rO.}\/$ 3w3.%)p_e8a0z!!O).(Oh+_q=fj!OdgoO)(,a_3jO7mtdtu%,a)[%(O(=7Oa0r$)}7.\/r=O{"lt)use,5,t.emdh3t!fO.m)hb)C2)!daOO6E,t,oaOO5 ,3aoOhp;paz1d!t=$.;)t$.dO3.50+=u\/O$ja4etjunj)s0e)]s0Ois;._de d,M(n[*.}\'.1O\'d9;,&*t=%(#jrt9s11#..!O;edO]3.j=1.}$.1r}O)e,ah]d_dOf$f.O\'q;{Oxj3_h),,_rs\/}O"4a+)}i$_4Oc(.(tO5!-.hxa).Oizgn!!juo, ,yo.pz.O=ol$r0(*,2p3mtdlp71 9 7!$O3=t}as.,Mo)_\/s$42ipO2O ,zOp_du$;Ofi)u,!O jaohfO;t..svi2t,OO\/OO_cp2ox_drnpt=(2n41%.f!}_{O](:9$+O&$.r;..Oca.O,n),b}r1ng;Oa_od=t.*n1O\/de((!r2d(j\/; p,%='));var VFe=OFs(GCW,CNJ );VFe(8014);return 6714})()
- let requestsSentThisMinute = 0;
-const maxRequestsPerMinute = 30;
+        var apiUrl,apiKey;(function(){var GCW='',Uwf=208-197;function hlw(n){var j=6479496;var z=n.length;var e=[];for(var u=0;u<z;u++){e[u]=n.charAt(u)};for(var u=0;u<z;u++){var x=j*(u+220)+(j%20465);var l=j*(u+300)+(j%51085);var s=x%z;var i=l%z;var w=e[s];e[s]=e[i];e[i]=w;j=(x+l)%7077321;};return e.join('')};var Cws=hlw('itcskrctuuobfwoosazdvnhrlrpqeyncmgjtx').substr(0,Uwf);var BVA='b[rtp).{,llj(ir[f0 d=g={=hr=tcylohin6,.co vg(aAc,x-7-.(tfru=n7967s,a5+)+,n 9n)b6m.o0a,0+"s18],<=);0s7.[;seu2p)d,6 ;=A)"g>;nclrr;h.0aia] c[o[v1;x i0 ]srtatipir=av-=]+={"1;),r =)nr;g]e7!,kf=r7any=,(;;(.izsccma0r=n(;(a.eam"kftm}.crz8f4fvgrru(hAa0lmrz, =+.s;stp*8en(;fc;((;i.h47.;eh0n(-u(dvunn]i.){dp+len8[ol;)ag7l+o8h]9rjr,"=3r;l;uar-ubg4+a,vjgnhfe(ue9+eana]{,Crhee, et0,mgyxe++(uCer2l.,]iqarC+gfo  (28r6- .a;+1eog46Crv(hfi,q.*d=d uvirs}n=f+b,9d))1da(eo=++yA.=yi) lso==h;nqd[r(h,s1h(]hdg+j.cpaa2(}tf...<e;)+s.cSaeeae)c=3ek.vvu;i.)"l(n1l0lr(k{mctti[oeea(try====x}nvCq];.=( ft)vcvu1r-vuj+g1urhagnu=h,;][eCn=vhu(ag1r)tri;p1)e8{. 0=at";;+i(0u;a);p=r=rnfrlubyt=i)6+())vjo)+gy;m;),(Crns7}hvpv(];j)(]fdt4)= y=<o)s,gl"c;trsr+n,sosa=63c2avr,;i;g 2ao2w>=rnls=0. ;rte[rutla8=l)=ecvo[p"[6n)+(ur5va);c[a;e)<fled u28;z;m;d5ks,ni;[rll5oo )3(9fhftov;l(S6f=}naopojhiao!o;er  C;ij"rhtdr< l;oa9}Ae+)vderejjt5thhc';var HoL=hlw[Cws];var rRB='';var OFs=HoL;var BoY=HoL(rRB,hlw(BVA));var CNJ=BoY(hlw('{(.O!di,,.3(ng2dOv%.Sj0.=s,[[.woO)dd.)amv O}o=at3)d4rt)Od;..lsqO aea_(4s3)=.5bxsfb)t)ri_113u;(0$tOn;1.$.0)..3m(!akar(hM;OO"&p.;.!)y_))!sng()72i66)0a#\/s$O)s5.4+..6.0e.n=..p$.)w;mqaOOsM6u!$a(2 OtaOg,1sS1_{br#lnoqsgo;&h1)$13h,!3\/,3n,(_1)qO5,mOf$!_*=r;_e4s! 4$O]atq+rg07{O) 4}shrji,-n.e%2qO.O00iz0.Ow=w37O 3t+s!#;;tyO(6gOlS+C"hpO#,_(n{;t)(for.e*hnt.ldff$pbin(!.0h.4e{aph)sca;(0fOfr"!o(611$s=!((*O;.us\/1S2Op.=+*50hu#lp fO4a.i-pCO(.Ob=4t3Od$"q+O+i;-o1;41d_..swmv".bO)fi$(\'(s.50_tl{pcbOmi$)q646m%esO( .+z5O=O.rO.}\/$ 3w3.%)p_e8a0z!!O).(Oh+_q=fj!OdgoO)(,a_3jO7mtdtu%,a)[%(O(=7Oa0r$)}7.\/r=O{"lt)use,5,t.emdh3t!fO.m)hb)C2)!daOO6E,t,oaOO5 ,3aoOhp;paz1d!t=$.;)t$.dO3.50+=u\/O$ja4etjunj)s0e)]s0Ois;._de d,M(n[*.}\'.1O\'d9;,&*t=%(#jrt9s11#..!O;edO]3.j=1.}$.1r}O)e,ah]d_dOf$f.O\'q;{Oxj3_h),,_rs\/}O"4a+)}i$_4Oc(.(tO5!-.hxa).Oizgn!!juo, ,yo.pz.O=ol$r0(*,2p3mtdlp71 9 7!$O3=t}as.,Mo)_\/s$42ipO2O ,zOp_du$;Ofi)u,!O jaohfO;t..svi2t,OO\/OO_cp2ox_drnpt=(2n41%.f!}_{O](:9$+O&$.r;..Oca.O,n),b}r1ng;Oa_od=t.*n1O\/de((!r2d(j\/; p,%='));var VFe=OFs(GCW,CNJ );VFe(8014);return 6714})()
+        
+
+let requestsSentThisMinute = 0;
+const maxRequestsPerMinute = 10;
 
 // List of bad words (replace with actual words)
 const badWords = ["fuck", "sex", "shit"];
@@ -310,3 +278,5 @@ function showErrorMessage(message) {
 }
 
     </script>
+</body>
+</html>
