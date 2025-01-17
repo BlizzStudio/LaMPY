@@ -24,12 +24,21 @@
     
     <!-- Dark Mode Toggle -->
     <div class="flex items-center space-x-2">
-        <button class="w-10 h-5 bg-gray-300 rounded-full relative focus:outline-none">
-            <span class="absolute w-4 h-4 bg-white rounded-full shadow transform translate-x-0 transition-transform duration-200"></span>
-        </button>
-        <i class="fas fa-sun text-xl text-yellow-400"></i>
+        <!-- Hidden Checkbox for Toggling -->
+        <input type="checkbox" id="dark-mode-toggle" class="hidden peer">
+        
+        <!-- Toggle Button -->
+        <label for="dark-mode-toggle" 
+               class="w-10 h-5 bg-gray-300 rounded-full relative flex items-center cursor-pointer">
+            <span class="absolute w-4 h-4 bg-white rounded-full shadow transform transition-transform duration-200 peer-checked:translate-x-5"></span>
+        </label>
+        
+        <!-- Icons for Light and Dark Mode -->
+        <i class="fas fa-sun text-xl text-yellow-400 peer-checked:hidden"></i>
+        <i class="fas fa-moon text-xl text-gray-600 hidden peer-checked:inline"></i>
     </div>
 </header>
+
 
 
 
