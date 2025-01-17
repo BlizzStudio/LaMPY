@@ -94,37 +94,33 @@ const badWords = ["fuck", "sex", "shit"];
 // Function to interact with the API
 async function fetchGroqData(prompt) {
     const requestBody = {
-        model: "llama-3.1-70b-versatile", // Model from your API documentation
-        messages: [
-            {
-                role: "user", // User's message
-                content: prompt, // The user's input message
-            }
-        ]
+        model: "llama-3.1-70b-versatile",
+        messages: [{ role: "user", content: prompt }],
     };
 
     try {
         const response = await fetch(apiUrl, {
-            method: 'POST',
+            method: "POST",
             headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${apiKey}` // Authorization with your API key
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${apiKey}`,
             },
-            body: JSON.stringify(requestBody) // Sending the structured request body
+            body: JSON.stringify(requestBody),
         });
 
         if (!response.ok) {
-            throw new Error('Failed to fetch data from the API');
+            throw new Error("Failed to fetch data from the API");
         }
 
         const data = await response.json();
-        return data.choices[0].message.content; // Assuming the response follows this structure
+        return data.choices[0].message.content;
     } catch (error) {
-        console.error('Error:', error);
+        console.error("Error:", error);
         return "Sorry, there was an error processing your request.";
     }
 }
 
+// Sidebar Toggle
 function openNav() {
     document.getElementById("mySidenav").style.width = "250px";
 }
@@ -133,164 +129,64 @@ function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
 }
 
-// Function to check if the user input contains bad words
-function containsBadWords(input) {
-    const inputLower = input.toLowerCase();
-    return badWords.some(word => inputLower.includes(word.toLowerCase()));
+// Toggle Dark Mode
+function toggleDarkMode() {
+    const isDarkMode = document.getElementById("dark-mode-checkbox").checked;
+    const body = document.body;
+    const header = document.querySelector("header");
+    const footer = document.querySelector("footer");
+    const sidebar = document.getElementById("mySidenav");
+
+    if (isDarkMode) {
+        body.classList.add("dark");
+        header.classList.add("bg-gray-800", "text-white");
+        footer.classList.add("bg-gray-800", "text-white");
+        sidebar.style.color = "white";
+    } else {
+        body.classList.remove("dark");
+        header.classList.remove("bg-gray-800", "text-white");
+        footer.classList.remove("bg-gray-800", "text-white");
+        sidebar.style.color = "black";
+    }
 }
 
+// Send Message Functionality
 async function sendMessage() {
-    const userInput = document.getElementById('user-input').value.trim();
+    const userInput = document.getElementById("user-input").value.trim();
     if (!userInput) return;
 
-    // Check if the rate limit is reached
-    if (requestsSentThisMinute >= maxRequestsPerMinute) {
-        showErrorMessage('Rate limit reached. Please wait a minute before trying again.');
-        return;
-    }
-
-    // Bad word detection
-    if (containsBadWords(userInput)) {
-        const chatContainer = document.getElementById('chat-container');
-        
-        // Display the user's message as "Content Removed"
-        const userMessage = document.createElement('div');
-        userMessage.className = 'flex items-start space-x-2 mt-4 justify-end';
-        userMessage.innerHTML = `<div class="bg-purple-200 text-black rounded-lg p-2"><i>Content Removed</i></div>`;
-        chatContainer.appendChild(userMessage);
-
-        // Display AI response with a custom message
-        const aiResponseHTML = `
-            <div class="flex items-start space-x-2 mt-4">
-                ${getBotPfp()} <!-- Function to insert PFP -->
-                <div class="bg-purple-200 text-black rounded-lg p-2">Please refrain from using inappropriate language.</div>
-            </div>
-        `;
-
-        chatContainer.scrollTop = chatContainer.scrollHeight; // Scroll to the bottom
-        document.getElementById('user-input').value = ''; // Clear input field
-
-        // Increment the requests count and reset after a minute
-        incrementRequestCount();
-
-        // Append the AI response to the chat container
-        chatContainer.innerHTML += aiResponseHTML;
-
-        return; // End the function early to avoid sending the bad message to the AI
-    }
+    const chatContainer = document.getElementById("chat-container");
 
     // Display user's message
-    const chatContainer = document.getElementById('chat-container');
-    const userMessage = document.createElement('div');
-    userMessage.className = 'flex items-start space-x-2 mt-4 justify-end';
+    const userMessage = document.createElement("div");
+    userMessage.className = "flex items-start space-x-2 mt-4 justify-end";
     userMessage.innerHTML = `<div class="bg-purple-200 text-black rounded-lg p-2">${userInput}</div>`;
     chatContainer.appendChild(userMessage);
 
-    // Display AI response (Typing...)
-    const typingDiv = document.createElement('div');
-    typingDiv.className = 'flex items-start space-x-2 mt-4';
+    // Display "Typing..." placeholder
+    const typingDiv = document.createElement("div");
+    typingDiv.className = "flex items-start space-x-2 mt-4";
     typingDiv.innerHTML = `<div class="bg-purple-200 text-black rounded-lg p-2">Typing...</div>`;
     chatContainer.appendChild(typingDiv);
-    chatContainer.scrollTop = chatContainer.scrollHeight; // Scroll to the bottom
 
-    // Fetch the AI response
+    // Fetch AI response
     const aiResponse = await fetchGroqData(userInput);
 
-    // Convert bold markdown (**text**) to HTML (<strong>text</strong>)
-    const formattedResponse = aiResponse.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-
-    // Update typing div with AI response and PFP
-    const aiResponseHTML = `
+    // Update "Typing..." with AI response
+    typingDiv.outerHTML = `
         <div class="flex items-start space-x-2 mt-4">
-            ${getBotPfp()} <!-- Function to insert PFP -->
-            <div class="bg-purple-200 text-black leading-6 mb-3 font-sans transition-all duration-300 ease-in-out rounded-lg p-2">${formattedResponse}</div>
-        </div>
-        <div class="mt-2 flex items-center">
-            <button 
-                class="flex items-center space-x-1 bg-white text-black px-2 py-1 rounded cursor-pointer"
-                onclick="copyToClipboard('${aiResponse.replace(/'/g, "\\'")}')"
-            >
-                ${getCopySvg()} 
-            </button>
-        </div>
-    `;
-
-    typingDiv.outerHTML = aiResponseHTML;
-    chatContainer.scrollTop = chatContainer.scrollHeight; // Scroll to the bottom
-    document.getElementById('user-input').value = ''; // Clear input field
-
-    // Increment the requests count and reset after a minute
-    incrementRequestCount();
-    function incrementRequestCount() {
-    requestsSentThisMinute++;
-    setTimeout(() => {
-        requestsSentThisMinute--;
-    }, 60000); // Decrease request count after 1 minute
-}
+            <div class="bg-purple-200 text-black rounded-lg p-2">${aiResponse}</div>
+        </div>`;
+    chatContainer.scrollTop = chatContainer.scrollHeight;
 }
 
-function getBotPfp() {
-    return `
-        <img 
-            src="https://i.ibb.co/McjMCyJ/Leonardo-Phoenix-10-A-simple-and-professional-logo-for-an-AI-a-1-1.jpg" alt="Leonardo-Phoenix-10-A-simple-and-professional-logo-for-an-AI-a-1-1" 
-            alt="AI Bot" 
-            class="w-10 h-10 rounded-full"
-        />
-    `;
-}
-
-// Function to return the Copy SVG
-function getCopySvg() {
-    return `
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon-md-heavy">
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M7 5C7 3.34315 8.34315 2 10 2H19C20.6569 2 22 3.34315 22 5V14C22 15.6569 20.6569 17 19 17H17V19C17 20.6569 15.6569 22 14 22H5C3.34315 22 2 20.6569 2 19V10C2 8.34315 3.34315 7 5 7H7V5ZM9 7H14C15.6569 7 17 8.34315 17 10V15H19C19.5523 15 20 14.5523 20 14V5C20 4.44772 19.5523 4 19 4H10C9.44772 4 9 4.44772 9 5V7ZM5 9C4.44772 9 4 9.44772 4 10V19C4 19.5523 4.44772 20 5 20H14C14.5523 20 15 19.5523 15 19V10C15 9.44772 14.5523 9 14 9H5Z" fill="currentColor"></path>
-        </svg>
-    `;
-}
-
-// Function to copy text to clipboard
+// Copy to Clipboard
 function copyToClipboard(text) {
-    navigator.clipboard.writeText(text).then(() => {
-        // Show toast message
-        const toast = document.getElementById('toast');
-        toast.classList.add('show'); // Show the toast
-        setTimeout(() => {
-            toast.classList.remove('show'); // Hide the toast after 3 seconds
-        }, 3000);
-    }).catch(err => {
-        console.error('Failed to copy: ', err);
-    });
+    navigator.clipboard
+        .writeText(text)
+        .then(() => alert("Text copied to clipboard"))
+        .catch((err) => console.error("Failed to copy: ", err));
 }
-
-// Toggle visibility of the emoji picker
-function toggleEmojiPicker() {
-    const emojiPicker = document.getElementById('emoji-picker');
-    // Toggle the display of the emoji picker
-    if (emojiPicker.style.display === 'none' || emojiPicker.style.display === '') {
-        emojiPicker.style.display = 'block'; // Show the picker
-    } else {
-        emojiPicker.style.display = 'none'; // Hide the picker
-    }
-}
-
-// Add selected emoji to the input field
-function addEmoji(emoji) {
-    const userInput = document.getElementById('user-input');
-    userInput.value += emoji; // Append the emoji to the input field
-
-    // Optionally, you can close the picker after selecting an emoji
-    toggleEmojiPicker();
-}
-
-function showErrorMessage(message) {
-    const errorMessageElement = document.getElementById('error-message');
-    errorMessageElement.textContent = message;
-    errorMessageElement.style.display = 'block';
-    setTimeout(() => {
-        errorMessageElement.style.display = 'none';
-    }, 5000); // Hide the error message after 5 seconds
-}
-
     </script>
 </body>
 </html>
