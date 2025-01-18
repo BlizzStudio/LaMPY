@@ -309,12 +309,7 @@ function copyToClipboard(text) {
 // Toggle visibility of the emoji picker
 function toggleEmojiPicker() {
     const emojiPicker = document.getElementById('emoji-picker');
-    // Toggle the display of the emoji picker
-    if (emojiPicker.style.display === 'none' || emojiPicker.style.display === '') {
-        emojiPicker.style.display = 'block'; // Show the picker
-    } else {
-        emojiPicker.style.display = 'none'; // Hide the picker
-    }
+    emojiPicker.classList.toggle('hidden'); // Toggle visibility using Tailwind's 'hidden' class
 }
 
 // Add selected emoji to the input field
@@ -325,6 +320,7 @@ function addEmoji(emoji) {
     // Optionally, you can close the picker after selecting an emoji
     toggleEmojiPicker();
 }
+
 
 function showErrorMessage(message) {
     const errorMessageElement = document.getElementById('error-message');
