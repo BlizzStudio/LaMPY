@@ -64,18 +64,16 @@
     </footer>
 
 
-
-<div class="emoji-picker absolute bg-white p-2 rounded-lg shadow-md hidden" id="emoji-picker">
-    <span onclick="addEmoji('😊')" class="cursor-pointer">😊</span>
-    <span onclick="addEmoji('😂')" class="cursor-pointer">😂</span>
-    <span onclick="addEmoji('😍')" class="cursor-pointer">😍</span>
-    <span onclick="addEmoji('😎')" class="cursor-pointer">😎</span>
-    <span onclick="addEmoji('😜')" class="cursor-pointer">😜</span>
-    <span onclick="addEmoji('🥺')" class="cursor-pointer">🥺</span>
-    <span onclick="addEmoji('😢')" class="cursor-pointer">😢</span>
-    <span onclick="addEmoji('😇')" class="cursor-pointer">😇</span>
+<div class="emoji-picker absolute hidden bg-white p-2 rounded-lg shadow-lg max-w-xs overflow-x-auto" id="emoji-picker">
+    <span onclick="addEmoji('😊')" class="cursor-pointer px-1 py-1 hover:bg-gray-200">😊</span>
+    <span onclick="addEmoji('😂')" class="cursor-pointer px-1 py-1 hover:bg-gray-200">😂</span>
+    <span onclick="addEmoji('😍')" class="cursor-pointer px-1 py-1 hover:bg-gray-200">😍</span>
+    <span onclick="addEmoji('😎')" class="cursor-pointer px-1 py-1 hover:bg-gray-200">😎</span>
+    <span onclick="addEmoji('😜')" class="cursor-pointer px-1 py-1 hover:bg-gray-200">😜</span>
+    <span onclick="addEmoji('🥺')" class="cursor-pointer px-1 py-1 hover:bg-gray-200">🥺</span>
+    <span onclick="addEmoji('😢')" class="cursor-pointer px-1 py-1 hover:bg-gray-200">😢</span>
+    <span onclick="addEmoji('😇')" class="cursor-pointer px-1 py-1 hover:bg-gray-200">😇</span>
 </div>
-
 
 
     <!-- Error and Toast Messages -->
@@ -308,15 +306,15 @@ function copyToClipboard(text) {
 
 function toggleEmojiPicker() {
     const emojiPicker = document.getElementById('emoji-picker');
-    emojiPicker.classList.toggle('hidden'); // This toggles visibility
+    emojiPicker.classList.toggle('hidden'); // This toggles visibility of the emoji picker
 }
 
-// Add selected emoji to the input field
+// Add the selected emoji to the input field
 function addEmoji(emoji) {
     const userInput = document.getElementById('user-input');
     userInput.value += emoji; // Append the emoji to the input field
 
-    // Optionally, you can close the picker after selecting an emoji
+    // Optionally, close the picker after selecting an emoji
     toggleEmojiPicker();
 }
 
