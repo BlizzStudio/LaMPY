@@ -362,7 +362,16 @@ function speakResponse(text) {
         // Wait for voices to be loaded
         speechSynthesis.addEventListener('voiceschanged', loadVoices);
     }
+
+    // Ensure speech synthesis only works after user interaction
+    setTimeout(() => {
+        if (speechSynthesis.speaking) {
+            speechSynthesis.cancel(); // Stop any previous speech
+        }
+        speechSynthesis.speak(utterance); // Start new speech
+    }, 100); // Delay to ensure voices are properly loaded
 }
+
     </script>
 </body>
 </html>
