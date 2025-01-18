@@ -65,7 +65,6 @@
 
 
 
-    <!-- Emoji Picker -->
 <div class="emoji-picker absolute bg-white p-2 rounded-lg shadow-md hidden" id="emoji-picker">
     <span onclick="addEmoji('😊')" class="cursor-pointer">😊</span>
     <span onclick="addEmoji('😂')" class="cursor-pointer">😂</span>
@@ -76,6 +75,7 @@
     <span onclick="addEmoji('😢')" class="cursor-pointer">😢</span>
     <span onclick="addEmoji('😇')" class="cursor-pointer">😇</span>
 </div>
+
 
 
     <!-- Error and Toast Messages -->
@@ -308,7 +308,7 @@ function copyToClipboard(text) {
 
 function toggleEmojiPicker() {
     const emojiPicker = document.getElementById('emoji-picker');
-    emojiPicker.classList.toggle('hidden'); // Use Tailwind's 'hidden' class to toggle visibility
+    emojiPicker.classList.toggle('hidden'); // This toggles visibility
 }
 
 // Add selected emoji to the input field
@@ -319,6 +319,7 @@ function addEmoji(emoji) {
     // Optionally, you can close the picker after selecting an emoji
     toggleEmojiPicker();
 }
+
 
 
 
