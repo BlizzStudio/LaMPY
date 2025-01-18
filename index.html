@@ -66,16 +66,17 @@
 
 
     <!-- Emoji Picker -->
-    <div class="emoji-picker" id="emoji-picker">
-        <span onclick="addEmoji('😊')">😊</span>
-        <span onclick="addEmoji('😂')">😂</span>
-        <span onclick="addEmoji('😍')">😍</span>
-        <span onclick="addEmoji('😎')">😎</span>
-        <span onclick="addEmoji('😜')">😜</span>
-        <span onclick="addEmoji('🥺')">🥺</span>
-        <span onclick="addEmoji('😢')">😢</span>
-        <span onclick="addEmoji('😇')">😇</span>
-    </div>
+<div class="emoji-picker absolute bg-white p-2 rounded-lg shadow-md hidden" id="emoji-picker">
+    <span onclick="addEmoji('😊')" class="cursor-pointer">😊</span>
+    <span onclick="addEmoji('😂')" class="cursor-pointer">😂</span>
+    <span onclick="addEmoji('😍')" class="cursor-pointer">😍</span>
+    <span onclick="addEmoji('😎')" class="cursor-pointer">😎</span>
+    <span onclick="addEmoji('😜')" class="cursor-pointer">😜</span>
+    <span onclick="addEmoji('🥺')" class="cursor-pointer">🥺</span>
+    <span onclick="addEmoji('😢')" class="cursor-pointer">😢</span>
+    <span onclick="addEmoji('😇')" class="cursor-pointer">😇</span>
+</div>
+
 
     <!-- Error and Toast Messages -->
     <div id="rate-limit-modal" class="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center hidden">
