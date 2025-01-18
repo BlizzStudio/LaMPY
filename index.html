@@ -85,9 +85,10 @@
         </div>
     </div>
     
-    <div class="toast fixed bottom-20 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-4 py-2 rounded-lg hidden" id="toast">
-        Copied to clipboard!
-    </div>
+<div class="toast fixed bottom-20 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-4 py-2 rounded-lg opacity-0 invisible transition-opacity duration-300" id="toast">
+    Copied to clipboard!
+</div>
+
 </body>
 
 
@@ -291,14 +292,18 @@ function copyToClipboard(text) {
     navigator.clipboard.writeText(text).then(() => {
         // Show toast message
         const toast = document.getElementById('toast');
-        toast.classList.add('show'); // Show the toast
+        toast.classList.remove('opacity-0', 'invisible');
+        toast.classList.add('opacity-100', 'visible'); // Show the toast
+
         setTimeout(() => {
-            toast.classList.remove('show'); // Hide the toast after 3 seconds
+            toast.classList.remove('opacity-100', 'visible');
+            toast.classList.add('opacity-0', 'invisible'); // Hide the toast after 3 seconds
         }, 3000);
     }).catch(err => {
         console.error('Failed to copy: ', err);
     });
 }
+
 
 // Toggle visibility of the emoji picker
 function toggleEmojiPicker() {
