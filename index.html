@@ -16,6 +16,7 @@
 </head>
 
 <body class="bg-white h-screen flex flex-col">
+    <!-- Header -->
     <header class="flex items-center justify-between p-4 bg-white sticky top-0 left-0 z-50">
         <span class="text-2xl cursor-pointer md:text-3xl" onclick="openNav()">&#9776;</span>
         <div id="mySidenav" class="sidenav fixed top-0 left-0 h-full bg-purple-300 text-white w-0 overflow-x-hidden transition-width duration-300">
@@ -33,7 +34,7 @@
         </div>
     </header>
 
-    <!-- Add padding to prevent footer overlap -->
+    <!-- Chat Container -->
     <main class="flex-1 p-4 overflow-auto pb-20" id="chat-container">
         <div class="text-center text-gray-500 mb-4">Today</div>
         <div class="flex items-start space-x-2">
@@ -41,6 +42,7 @@
         </div>
     </main>
 
+    <!-- Footer -->
     <footer class="p-4 bg-white fixed bottom-0 left-0 w-full">
         <div class="bg-purple-300 p-2 rounded-lg flex items-center space-x-2 max-w-md mx-auto sm:max-w-lg md:max-w-xl lg:max-w-2xl">
             <div class="bg-purple-100 p-2 rounded-full cursor-pointer" onclick="toggleEmojiPicker()">
@@ -56,24 +58,22 @@
             </div>
         </div>
 
-
-
         <div class="text-center text-gray-500 text-sm mt-2">
             Powered by <span class="font-bold text-purple-500">Luma</span>
         </div>
     </footer>
 
-
-<div class="emoji-picker absolute hidden bg-white p-2 rounded-lg shadow-lg max-w-xs overflow-x-auto" id="emoji-picker">
-    <span onclick="addEmoji('😊')" class="cursor-pointer px-1 py-1 hover:bg-gray-200">😊</span>
-    <span onclick="addEmoji('😂')" class="cursor-pointer px-1 py-1 hover:bg-gray-200">😂</span>
-    <span onclick="addEmoji('😍')" class="cursor-pointer px-1 py-1 hover:bg-gray-200">😍</span>
-    <span onclick="addEmoji('😎')" class="cursor-pointer px-1 py-1 hover:bg-gray-200">😎</span>
-    <span onclick="addEmoji('😜')" class="cursor-pointer px-1 py-1 hover:bg-gray-200">😜</span>
-    <span onclick="addEmoji('🥺')" class="cursor-pointer px-1 py-1 hover:bg-gray-200">🥺</span>
-    <span onclick="addEmoji('😢')" class="cursor-pointer px-1 py-1 hover:bg-gray-200">😢</span>
-    <span onclick="addEmoji('😇')" class="cursor-pointer px-1 py-1 hover:bg-gray-200">😇</span>
-</div>
+    <!-- Emoji Picker -->
+    <div id="emoji-picker" class="emoji-picker absolute hidden bg-white p-2 rounded-lg shadow-lg max-w-xs overflow-x-auto bottom-16 left-0 z-20">
+        <span onclick="addEmoji('😊')" class="cursor-pointer px-1 py-1 hover:bg-gray-200">😊</span>
+        <span onclick="addEmoji('😂')" class="cursor-pointer px-1 py-1 hover:bg-gray-200">😂</span>
+        <span onclick="addEmoji('😍')" class="cursor-pointer px-1 py-1 hover:bg-gray-200">😍</span>
+        <span onclick="addEmoji('😎')" class="cursor-pointer px-1 py-1 hover:bg-gray-200">😎</span>
+        <span onclick="addEmoji('😜')" class="cursor-pointer px-1 py-1 hover:bg-gray-200">😜</span>
+        <span onclick="addEmoji('🥺')" class="cursor-pointer px-1 py-1 hover:bg-gray-200">🥺</span>
+        <span onclick="addEmoji('😢')" class="cursor-pointer px-1 py-1 hover:bg-gray-200">😢</span>
+        <span onclick="addEmoji('😇')" class="cursor-pointer px-1 py-1 hover:bg-gray-200">😇</span>
+    </div>
 
 
     <!-- Error and Toast Messages -->
@@ -88,7 +88,7 @@
     Copied to clipboard!
 </div>
 
-</body>
+
 
 
     </div>
