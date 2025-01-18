@@ -159,6 +159,15 @@ function showRateLimitModal() {
         modal.classList.add('hidden'); // Hide the modal after 5 seconds
     }, 5000);
 }
+
+// Function to increment request count
+function incrementRequestCount() {
+    requestsSentThisMinute++;
+    setTimeout(() => {
+        requestsSentThisMinute--;
+    }, 60000); // Decrease request count after 1 minute
+}
+
 function handleRequest() {
     if (requestsSentThisMinute >= maxRequestsPerMinute) {
         showRateLimitModal(); // Show modal when rate limit is reached
@@ -255,14 +264,7 @@ async function sendMessage() {
     chatContainer.scrollTop = chatContainer.scrollHeight; // Scroll to the bottom
     document.getElementById('user-input').value = ''; // Clear input field
 
-    // Increment the requests count and reset after a minute
     incrementRequestCount();
-    function incrementRequestCount() {
-    requestsSentThisMinute++;
-    setTimeout(() => {
-        requestsSentThisMinute--;
-    }, 60000); // Decrease request count after 1 minute
-}
 }
 
 function getBotPfp() {
